@@ -4,7 +4,7 @@ const sequelize = require('./config/db');
 const cors = require('cors');
 const userRoute = require('./routes/userRoute')
 
-const port = process.env.PORT;
+const port = process.env.PORT || 3000;
 
 const app = express();
 
@@ -13,16 +13,35 @@ app.use(express.urlencoded({extended: false}))
 app.use(cors())
 
 const dbConnect = async () => {
-   await sequelize.authenticate();
-    console.log("DB connected");
+    try {
+        await sequelize.authenticate();
+        console.log("DB connected successfully");
 
-   await sequelize.sync();
-    console.log("DB Sync");
-}
+    } catch (error) {
+        console.error("DB connection failed:", error.message);
+        process.exit(1);
+    }
+};
 
+// check endpoint
 app.use('/api', userRoute)
 
-app.listen(port, () => [
-    console.log(`Server running on ${port}`),
-    dbConnect()
-])
+// health check endpoint
+app.get('/health', (req, res) => {
+    res.json({ status: 'OK', message: 'Server is running' });
+});
+
+const startServer = async () => {
+    try {
+        await dbConnect();
+        app.listen(port, '0.0.0.0', () => {
+            console.log(`Server running on port ${port}`);
+            console.log(`API URL: http://localhost:${port}`);
+        });
+    } catch (error) {
+        console.error('Failed to start server:', error);
+        process.exit(1);
+    }
+};
+
+startServer();
