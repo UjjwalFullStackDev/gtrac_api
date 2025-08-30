@@ -1,7 +1,7 @@
 const express = require('express');
 require('dotenv').config();
-// const sequelize = require('./config/db');
-const sequelize = require('./config/dbLocal');
+const sequelize = require('./config/db');
+// const sequelize = require('./config/dbLocal');
 const cors = require('cors');
 const userRoute = require('./routes/userRoute')
 

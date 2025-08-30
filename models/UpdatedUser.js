@@ -1,6 +1,6 @@
 const { DataTypes } = require('sequelize');
-// const sequelize = require("../config/db");
-const sequelize = require("../config/dbLocal");
+const sequelize = require("../config/db");
+// const sequelize = require("../config/dbLocal");
 
 const UpdatedUser = sequelize.define("UpdatedUser", {
   user_id: {
