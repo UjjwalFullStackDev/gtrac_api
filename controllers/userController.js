@@ -33,7 +33,7 @@ const getUsers = async (req, res) => {
         "isOnlyPolyline",
         "is_videotelematics",
       ],
-      order: [['id', 'DESC']],
+      order: [['user_id', 'DESC']],
       raw: true,
     });
     if (!users || users.length === 0) {
@@ -81,7 +81,7 @@ const updateUser = async (req, res) => {
 
     // Also update/insert into UserUpdates table
     await UpdatedUser.create({
-  user_id: user.id,   // ✅ new field for reference
+  user_id: user.id,
   sys_username: user.sys_username,
   sys_password: user.sys_password,
   sys_parent_user: user.sys_parent_user,
