@@ -1,8 +1,9 @@
-const { DataTypes } = require('sequelize')
-const sequelize = require("../config/db");
+const { DataTypes } = require('sequelize');
+// const sequelize = require("../config/db");
+const sequelize = require("../config/dbLocal");
 
-const User = sequelize.define("User", {
-  userid: {
+const UpdatedUser = sequelize.define("UpdatedUser", {
+  user_id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
     allowNull: false,
@@ -19,7 +20,7 @@ const User = sequelize.define("User", {
     type: DataTypes.INTEGER,
     allowNull: true,
   },
-  groupid: {
+  similartype_groupid: {
     type: DataTypes.INTEGER,
     allowNull: true,
   },
@@ -43,27 +44,11 @@ const User = sequelize.define("User", {
     type: DataTypes.STRING(255),
     allowNull: true,
   },
-  payment: {
-    type: DataTypes.DECIMAL(10, 2),
-    defaultValue: 0,
-  },
-  logo: {
-    type: DataTypes.STRING(100),
-    allowNull: true,
-  },
-  access_label: {
-    type: DataTypes.STRING(100),
-    allowNull: true,
-  },
-  extra: {
-    type: DataTypes.STRING(50),
-    allowNull: true,
-  },
-  isAC: {
+  ac_status: {
     type: DataTypes.BOOLEAN,
     defaultValue: 0,
   },
-  isOdometer: {
+  is_odometer: {
     type: DataTypes.BOOLEAN,
     defaultValue: 0,
   },
@@ -75,15 +60,11 @@ const User = sequelize.define("User", {
     type: DataTypes.BOOLEAN,
     defaultValue: 0,
   },
-  isImb: {
+  imb_password: {
     type: DataTypes.BOOLEAN,
     defaultValue: 0,
   },
-  isNotification: {
-    type: DataTypes.BOOLEAN,
-    defaultValue: 0,
-  },
-  isPadlock: {
+  show_notification: {
     type: DataTypes.BOOLEAN,
     defaultValue: 0,
   },
@@ -99,23 +80,23 @@ const User = sequelize.define("User", {
     type: DataTypes.BOOLEAN,
     defaultValue: 0,
   },
-  isMarcketvehicle: {
+  is_marketvhl: {
     type: DataTypes.BOOLEAN,
     defaultValue: 0,
   },
-  MemberSince: {
-    type: DataTypes.STRING(20),
+  sys_added_date: {
+    type: DataTypes.DATE,
     allowNull: true,
   },
-  extraInfo: {
+  extrainforjson: {
     type: DataTypes.STRING(255),
     allowNull: true,
   },
-  isGoogleMap: {
+  is_googlemap: {
     type: DataTypes.BOOLEAN,
     defaultValue: 0,
   },
-  isCrackPadlock: {
+  is_crackpadlock: {
     type: DataTypes.BOOLEAN,
     defaultValue: 0,
   },
@@ -128,8 +109,8 @@ const User = sequelize.define("User", {
     defaultValue: 0,
   },
 }, {
-  tableName: "users",
+  tableName: "updatedUsers",
   timestamps: false,
 });
 
-export default User;
+module.exports = UpdatedUser;
