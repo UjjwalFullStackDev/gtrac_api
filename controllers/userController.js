@@ -6,7 +6,7 @@ const getUsers = async (req, res) => {
   try {
     const users = await UpdatedUser.findAll({
       attributes: [
-        ["id", "userid"],
+        ["user_id", "userid"],
         "sys_username",
         "sys_password",
         "sys_parent_user",
